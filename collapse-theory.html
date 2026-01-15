@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collapse Theory — Games You Own. Mechanics That Matter.</title>
+  <meta name="description" content="Collapse Theory is a games studio building mechanics-first puzzle games you buy once and own forever — no DRM, no subscriptions, no traps." />
+  <meta property="og:title" content="Collapse Theory — Games You Own. Mechanics That Matter." />
+  <meta property="og:description" content="Mechanics-first puzzle games with soul. Buy once, play forever. No DRM. No subscriptions. No traps." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b0b12" />
+
+  <style>
+    /*
+      Collapse Theory landing page
+      - Single HTML file
+      - No external dependencies
+      - Accessible, responsive, fast
+    */
+
+    :root{
+      --bg: #07070c;
+      --bg2:#0b0b12;
+      --card:#0e0f18;
+      --text:#f2f2ff;
+      --muted:#b8b8d6;
+      --faint:#7d7da8;
+      --line: rgba(255,255,255,.10);
+      --glow1: rgba(126, 231, 255, .20);
+      --glow2: rgba(255, 156, 255, .16);
+      --accent:#7ee7ff;
+      --accent2:#ff9cff;
+      --good:#9cffb0;
+      --warn:#ffd27a;
+      --radius: 20px;
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --shadow2: 0 12px 30px rgba(0,0,0,.45);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 10%, rgba(126,231,255,.10), transparent 60%),
+        radial-gradient(1000px 700px at 80% 15%, rgba(255,156,255,.08), transparent 65%),
+        radial-gradient(900px 700px at 50% 90%, rgba(126,231,255,.07), transparent 70%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 40%, #05050a 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+    .container{max-width:1140px;margin:0 auto;padding:0 20px}
+
+    /* Subtle animated grain */
+    .grain{
+      position:fixed;
+      inset:-20%;
+      pointer-events:none;
+      opacity:.08;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/></filter><rect width="160" height="160" filter="url(%23n)" opacity=".5"/></svg>');
+      mix-blend-mode:overlay;
+      transform: translate3d(0,0,0);
+    }
+    
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(7,7,12,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+    }
+    .logo{
+      width:36px;height:36px;
+      border-radius:12px;
+      background-image: url('./logo-128.png');
+
+    }
+
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .brand span{
+      font-weight:700;
+      letter-spacing:.3px;
+      font-size:15px;
+    }
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{
+      text-decoration:none;
+      color:var(--muted);
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:10px;
+      transition: all .2s ease;
+    }
+    .navlinks a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+
+    .cta{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:650;
+      font-size:14px;
+      cursor:pointer;
+      text-decoration:none;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      box-shadow: var(--shadow2);
+    }
+    .btn:hover{transform: translateY(-1px);background: rgba(255,255,255,.07);border-color: rgba(255,255,255,.22)}
+    .btn:active{transform: translateY(0px)}
+    .btn.primary{
+      border-color: rgba(126,231,255,.45);
+      background: linear-gradient(135deg, rgba(126,231,255,.22), rgba(255,156,255,.16));
+    }
+
+    /* Hero */
+    .hero{
+      padding:72px 0 40px;
+      position:relative;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:28px;
+      align-items:stretch;
+    }
+    @media (max-width: 960px){
+      .heroGrid{grid-template-columns:1fr;}
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height:1.06;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      color:var(--muted);
+      font-size: clamp(16px, 1.5vw, 18px);
+      max-width: 58ch;
+      margin:0 0 22px;
+    }
+
+    .badgeRow{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 26px}
+    .badge{
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+    }
+    .badge strong{color:var(--text)}
+
+    .heroCard{
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      min-height: 260px;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(900px 400px at 20% 0%, var(--glow1), transparent 55%),
+        radial-gradient(800px 400px at 90% 20%, var(--glow2), transparent 55%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .heroCardInner{position:relative}
+
+    .miniTitle{font-weight:750;letter-spacing:.3px;font-size:13px;color:var(--muted);text-transform:uppercase}
+    .manifestoLine{margin-top:10px;font-size:16px;color:var(--text)}
+    .manifestoLine em{color:var(--accent);font-style:normal;font-weight:700}
+
+    .divider{height:1px;background:var(--line);margin:14px 0}
+
+    .promiseList{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+    .promiseList li{
+      display:flex;gap:10px;align-items:flex-start;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;margin-top:4px;
+      background: radial-gradient(circle at 30% 30%, var(--good), rgba(156,255,176,.0) 65%),
+                  linear-gradient(180deg, rgba(156,255,176,.7), rgba(156,255,176,.05));
+      border:1px solid rgba(156,255,176,.35);
+      flex:0 0 auto;
+    }
+
+    .heroActions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+
+    /* Sections */
+    section{padding:54px 0}
+    .sectionTitle{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:18px;
+    }
+    h2{margin:0;font-size: clamp(22px, 2.5vw, 30px);letter-spacing:-.3px}
+    .hint{color:var(--faint);font-size:14px;margin:0}
+
+    .grid3{display:grid;grid-template-columns:repeat(3, 1fr);gap:14px}
+    @media (max-width: 960px){.grid3{grid-template-columns:1fr}}
+
+    .card{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:
+        radial-gradient(600px 240px at 0% 0%, rgba(126,231,255,.10), transparent 55%),
+        radial-gradient(600px 240px at 100% 0%, rgba(255,156,255,.08), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .card > *{position:relative}
+
+    .kicker{color:var(--muted);font-size:13px;letter-spacing:.35px;text-transform:uppercase;margin:0 0 10px}
+    .card h3{margin:0 0 8px;font-size:18px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Game spotlight */
+    .spotlight{
+      display:grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 960px){.spotlight{grid-template-columns:1fr}}
+
+    .gamePoster{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(900px 500px at 25% 20%, rgba(126,231,255,.18), transparent 60%),
+        radial-gradient(700px 500px at 75% 40%, rgba(255,156,255,.14), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      min-height: 320px;
+    }
+    .gamePoster:after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.0), rgba(255,255,255,.10), rgba(255,255,255,.0));
+      transform: translateX(-120%);
+      animation: shine 4.5s ease-in-out infinite;
+      opacity:.35;
+      pointer-events:none;
+    }
+    @keyframes shine{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+
+    .posterTop{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .tag{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .dbTitle{
+      margin:18px 0 10px;
+      font-size:28px;
+      letter-spacing:-.4px;
+      line-height:1.1;
+    }
+    .dbDesc{margin:0 0 14px;color:var(--muted);max-width:60ch}
+
+    .featureList{display:grid;gap:10px;margin:14px 0 0;padding:0;list-style:none}
+    .featureList li{display:flex;gap:10px;color:var(--muted);font-size:14px}
+    .spark{
+      width:12px;height:12px;border-radius:6px;margin-top:3px;
+      background: radial-gradient(circle at 30% 30%, var(--accent), rgba(126,231,255,0) 60%),
+                  linear-gradient(180deg, rgba(126,231,255,.7), rgba(126,231,255,.05));
+      border:1px solid rgba(126,231,255,.35);
+      flex:0 0 auto;
+    }
+
+    .gameCard{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding:18px;
+      box-shadow: var(--shadow2);
+    }
+
+    .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .pill{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* Newsletter */
+    form{margin-top:12px}
+    .fieldRow{display:flex;gap:10px;flex-wrap:wrap}
+    input[type="email"]{
+      flex:1 1 240px;
+      min-width: 220px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color:var(--text);
+      outline:none;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    input[type="email"]:focus{border-color: rgba(126,231,255,.55)}
+
+    .fineprint{color:var(--faint);font-size:12px;margin:10px 0 0}
+
+    /* Footer */
+    footer{padding:28px 0 34px;border-top:1px solid var(--line);color:var(--faint)}
+    .footerRow{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    .footerLinks{display:flex;gap:14px;flex-wrap:wrap}
+    .footerLinks a{color:var(--faint);text-decoration:none}
+    .footerLinks a:hover{color:var(--text)}
+
+    /* Accessibility helpers */
+    .skip{
+      position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden
+    }
+    .skip:focus{
+      left:14px;top:14px;width:auto;height:auto;z-index:1000;
+      background: rgba(0,0,0,.75);color:var(--text);
+      padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.16)
+    }
+
+    /* Tiny mobile tweaks */
+    @media (max-width: 520px){
+      .navlinks{display:none}
+      .btn{padding:10px 12px}
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Collapse Theory home">
+          <img class="logo" src="./logo-128.png" alt="Collapse Theory logo" />
+          <span>Collapse Theory</span>
+        </a>
+
+        <nav class="navlinks" aria-label="Primary">
+          <a href="#manifesto">Manifesto</a>
+          <a href="#games">Games</a>
+          <a href="#promise">Player Promise</a>
+          <a href="#join">Join</a>
+        </nav>
+
+        <div class="cta">
+          <a class="btn" href="#join">Get updates</a>
+          <a class="btn primary" href="#games">See Droppy Blocky</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <div class="container hero" id="top">
+      <div class="heroGrid">
+        <div>
+          <h1>Games you own.<br/>Mechanics that matter.</h1>
+          <p class="sub">
+            Collapse Theory is a puzzle studio building timeless gameplay with modern polish.
+            No DRM traps. No subscriptions. No disappearing libraries. Just games that respect your time — and your ownership.
+          </p>
+
+          <div class="badgeRow" aria-label="Key principles">
+            <div class="badge"><strong>Buy once</strong> · play forever</div>
+            <div class="badge">Offline-first</div>
+            <div class="badge">Mod-friendly</div>
+            <div class="badge">Cross‑platform by design</div>
+          </div>
+
+          <div class="heroActions">
+            <a class="btn primary" href="#join">Join the Theory</a>
+            <a class="btn" href="#manifesto">Read the Manifesto</a>
+          </div>
+        </div>
+
+        <aside class="heroCard" aria-label="Manifesto highlight">
+          <div class="heroCardInner">
+            <div class="miniTitle">Collapse Theory Manifesto</div>
+            <p class="manifestoLine">When you buy a game, it should be <em>yours</em>. Forever.</p>
+            <div class="divider"></div>
+            <ul class="promiseList">
+              <li><span class="dot" aria-hidden="true"></span><span><strong>Zero DRM.</strong> No online checks, no hostage libraries.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span><strong>Zero manipulation.</strong> No ads, loot boxes, or “engagement” traps.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span><strong>Built to last.</strong> Modular systems, clear UI, deep mechanics.</span></li>
+              <li><span class="dot" aria-hidden="true"></span><span><strong>Respectful by default.</strong> Your time, your skill, your ownership.</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- MANIFESTO / WHY -->
+    <section id="manifesto">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Why we exist</h2>
+          <p class="hint">Because “renting” games forever is definitely a totally normal idea.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <p class="kicker">Mechanics-first</p>
+            <h3>Reward mastery, not monetization</h3>
+            <p>Design that respects skill — with systems you can learn, exploit, and truly master.</p>
+          </div>
+          <div class="card">
+            <p class="kicker">Puzzle games with soul</p>
+            <h3>Rituals, not retention metrics</h3>
+            <p>Games you come back to because they feel good, not because a timer told you to.</p>
+          </div>
+          <div class="card">
+            <p class="kicker">Polish + depth</p>
+            <h3>Modular clarity, not spectacle</h3>
+            <p>Every asset earns its place. Every UI element is crafted for clarity and delight.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMES -->
+    <section id="games">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Games</h2>
+          <p class="hint">The beginning of a small rebellion against disposable design.</p>
+        </div>
+
+        <div class="spotlight">
+          <div class="gamePoster" aria-label="Droppy Blocky spotlight">
+            <div class="posterTop">
+              <span class="tag">First Release</span>
+              <span class="tag">Puzzle · At‑your‑pace</span>
+            </div>
+            <h3 class="dbTitle">Droppy Blocky</h3>
+            <p class="dbDesc">
+              A modern interpretation of classic collapse-style puzzling: clean visuals, crisp feedback,
+              and mechanics that scale from “cozy session” to “I can’t believe I just did that.”
+            </p>
+
+            <ul class="featureList">
+              <li><span class="spark" aria-hidden="true"></span><span><strong>Calm puzzle mode</strong> — no timer pressure, just flow.</span></li>
+              <li><span class="spark" aria-hidden="true"></span><span><strong>Readable board state</strong> — clarity first, always.</span></li>
+              <li><span class="spark" aria-hidden="true"></span><span><strong>Depth through systems</strong> — emergent combos, not gimmicks.</span></li>
+              <li><span class="spark" aria-hidden="true"></span><span><strong>Future-proof</strong> — offline play, no vanishing purchases.</span></li>
+            </ul>
+
+            <div class="pillRow" aria-label="Planned platforms">
+              <span class="pill">Mobile</span>
+              <span class="pill">Desktop</span>
+              <span class="pill">Tablet</span>
+              <span class="pill">Console</span>
+            </div>
+          </div>
+
+          <div class="gameCard">
+            <p class="kicker">Coming soon</p>
+            <h3>Droppy Blocky — Release Notes You’ll Actually Like</h3>
+            <p style="margin-top:8px;color:var(--muted)">
+              We’ll share development updates the old-fashioned way:
+              short, honest, and not engineered to farm your attention.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="grid3" style="grid-template-columns:1fr;gap:10px">
+              <div class="card" style="box-shadow:none">
+                <p class="kicker">What to expect</p>
+                <p>Gameplay clips, system breakdowns, platform news, and the occasional spicy opinion about DRM.</p>
+              </div>
+              <div class="card" style="box-shadow:none">
+                <p class="kicker">What you won’t get</p>
+                <p>“Limited-time” anything. If you see that phrase from us, assume we’ve been replaced by aliens.</p>
+              </div>
+            </div>
+
+            <div class="heroActions" style="margin-top:14px">
+              <a class="btn primary" href="#join">Get Droppy Blocky updates</a>
+              <a class="btn" href="#promise">Read the Player Promise</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PROMISE -->
+    <section id="promise">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Our promise to players</h2>
+          <p class="hint">If this sounds “anti-industry,” that’s because it is.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <p class="kicker">Ownership</p>
+            <h3>Buy once, play forever</h3>
+            <p>No online checks. No platform lock‑in. Your purchase is a gift to your future self.</p>
+          </div>
+          <div class="card">
+            <p class="kicker">No traps</p>
+            <h3>No ads. No loot boxes. No manipulation.</h3>
+            <p>We make games, not slot machines wearing a puzzle skin.</p>
+          </div>
+          <div class="card">
+            <p class="kicker">Longevity</p>
+            <h3>Offline, mod‑friendly, cross‑platform</h3>
+            <p>Built for the devices you have now — and the ones you’ll have next.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN PHILOSOPHY -->
+    <section id="philosophy">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Design philosophy</h2>
+          <p class="hint">Every mechanic earns its place. Every pixel has a job.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <p class="kicker">Craft</p>
+            <h3>Clarity is a feature</h3>
+            <p>Readable UI, satisfying feedback, and systems that teach you as you play.</p>
+          </div>
+          <div class="card">
+            <p class="kicker">Systems</p>
+            <h3>Creative systems, not treadmills</h3>
+            <p>Emergence > endless content. Depth > daily chores. Your brain deserves better.</p>
+          </div>
+          <div class="card">
+            <p class="kicker">Modularity</p>
+            <h3>Reuse without repetition</h3>
+            <p>Assets and mechanics designed to evolve across games — without feeling copy‑pasted.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOIN -->
+    <section id="join">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Join the Theory</h2>
+          <p class="hint">If you believe games should be owned, not rented… welcome.</p>
+        </div>
+
+        <div class="card">
+          <p class="kicker">Get updates</p>
+          <h3 style="margin:0 0 8px">Be first to play Droppy Blocky</h3>
+          <p style="margin:0;color:var(--muted);max-width:75ch">
+            Drop your email for launch updates and dev notes. We’ll keep it human.
+            (If we ever send “limited-time” anything, you have permission to publicly mock us.)
+          </p>
+
+          <!--
+            NOTE:
+            This form is front-end only.
+            Hook it up to your email provider (e.g., Buttondown, Mailchimp, ConvertKit)
+            by replacing the action URL.
+          -->
+          <form action="#" method="post" onsubmit="return false" aria-label="Newsletter signup">
+            <div class="fieldRow">
+              <label for="email" class="skip">Email</label>
+              <input id="email" type="email" placeholder="you@domain.com" autocomplete="email" />
+              <button class="btn primary" type="submit" onclick="fakeSignup()">Notify me</button>
+            </div>
+            <p class="fineprint">No spam. No tracking pixels. No pretending this is a ‘community.’</p>
+            <p class="fineprint" id="signupMsg" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footerRow">
+        <div>
+          <strong style="color:var(--text)">Collapse Theory</strong>
+          <div style="font-size:12px;margin-top:4px">© <span id="year"></span> Collapse Theory. All rights reserved.</div>
+        </div>
+        <div class="footerLinks" aria-label="Footer links">
+          <a href="#manifesto">Manifesto</a>
+          <a href="#games">Games</a>
+          <a href="#promise">Promise</a>
+          <a href="#join">Join</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tiny helper scripts. Keep it simple.
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function fakeSignup(){
+      const input = document.getElementById('email');
+      const msg = document.getElementById('signupMsg');
+      const email = (input.value || '').trim();
+
+      if(!email){
+        msg.textContent = "Drop an email in the box first — unless you're signing up telepathically.";
+        return;
+      }
+      if(!/^\S+@\S+\.\S+$/.test(email)){
+        msg.textContent = "That email looks… adventurous. Try a normal one?";
+        return;
+      }
+
+      msg.textContent = "Nice. You're on the list (pretend this is connected to a real backend for now).";
+      input.value = "";
+    }
+  </script>
+</body>
+</html>
