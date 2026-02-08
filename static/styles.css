@@ -88,7 +88,7 @@ header{
 .logo{
   width:36px;height:36px;
   border-radius:12px;
-  background-image: url('./logo-128.png');
+  background-image: url('./logo-800.png');
 
 }
 
@@ -325,6 +325,106 @@ h2{margin:0;font-size: clamp(22px, 2.5vw, 30px);letter-spacing:-.3px}
   border-radius:999px;
   font-size:13px;
   color:var(--muted);
+}
+
+.screenshotsBlock{
+  margin-top:18px;
+}
+
+.screenshotsBlock h3{
+  margin:0;
+  font-size: clamp(18px, 2vw, 24px);
+  letter-spacing:-.2px;
+}
+
+.carouselControls{
+  display:flex;
+  gap:8px;
+}
+
+.screenshotCarousel{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:8px;
+}
+
+.screenshotCarousel::-webkit-scrollbar{
+  height:10px;
+}
+
+.screenshotCarousel::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.22);
+  border-radius:999px;
+}
+
+.shotCard{
+  margin:0;
+  flex:0 0 min(640px, 100%);
+  border-radius: var(--radius);
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.03);
+  overflow:hidden;
+  box-shadow: var(--shadow2);
+  scroll-snap-align:start;
+}
+
+.shotCard img{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+.screenshotCarouselProminent{
+  gap:16px;
+}
+
+.shotCardProminent{
+  flex:0 0 min(860px, 100%);
+}
+
+.screenshotCarouselCompact{
+  margin-top:12px;
+}
+
+.shotCardCompact{
+  flex:0 0 100%;
+}
+
+.dbPageHero{
+  padding:72px 0 28px;
+}
+
+.releaseNotesList{
+  display:grid;
+  gap:12px;
+}
+
+.releaseNoteCard{
+  padding:16px;
+}
+
+.releaseNoteHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:8px;
+}
+
+.releaseNoteHeader h3{
+  margin:0;
+}
+
+.releaseNoteItems{
+  margin:0;
+  padding-left:18px;
+  color:var(--muted);
+}
+
+.releaseNoteItems li + li{
+  margin-top:6px;
 }
 
 /* Newsletter */

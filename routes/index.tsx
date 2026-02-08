@@ -1,5 +1,11 @@
 
 export default function Home() {
+  const homeScreenshots = [
+    "arcade.png",
+    "level-complete.png",
+    "puzzle.png",
+  ];
+
   return <>
     <div class="container hero" id="top">
       <div class="heroGrid">
@@ -101,29 +107,34 @@ export default function Home() {
           </div>
 
           <div class="gameCard">
-            <p class="kicker">Coming soon</p>
-            <h3>Droppy Blocky — Release Notes You’ll Actually Like</h3>
+            <p class="kicker">Screenshot preview</p>
+            <h3>Droppy Blocky in motion</h3>
             <p style="margin-top:8px;color:var(--muted)">
-              We’ll share development updates the old-fashioned way:
-              short, honest, and not engineered to farm your attention.
+              Quick look at the current build. Full gallery and release notes are on the game page.
             </p>
 
             <div class="divider"></div>
 
-            <div class="grid3" style="grid-template-columns:1fr;gap:10px">
-              <div class="card" style="box-shadow:none">
-                <p class="kicker">What to expect</p>
-                <p>Gameplay clips, system breakdowns, platform news, and the occasional spicy opinion about DRM.</p>
-              </div>
-              <div class="card" style="box-shadow:none">
-                <p class="kicker">What you won’t get</p>
-                <p>“Limited-time” anything. If you see that phrase from us, assume we’ve been replaced by aliens.</p>
-              </div>
+            <div class="carouselControls" aria-label="Homepage screenshot carousel controls">
+              <button class="btn" type="button" data-carousel-target="droppy-home-carousel" data-direction="prev">Previous</button>
+              <button class="btn" type="button" data-carousel-target="droppy-home-carousel" data-direction="next">Next</button>
+            </div>
+
+            <div class="screenshotCarousel screenshotCarouselCompact" id="droppy-home-carousel" aria-label="Droppy Blocky homepage screenshots">
+              {homeScreenshots.map((imageName) => (
+                <figure class="shotCard shotCardCompact" key={imageName}>
+                  <img
+                    src={`/images/screenshots/droppy-blocky/${imageName}`}
+                    alt={`Droppy Blocky screenshot: ${imageName.replace(".png", "").replace("-", " ")}`}
+                    loading="lazy"
+                  />
+                </figure>
+              ))}
             </div>
 
             <div class="heroActions" style="margin-top:14px">
-              <a class="btn primary" href="#join">Get Droppy Blocky updates</a>
-              <a class="btn" href="#promise">Read the Player Promise</a>
+              <a class="btn primary" href="/droppy-blocky">View full game page</a>
+              <a class="btn" href="/#join">Get Droppy Blocky updates</a>
             </div>
           </div>
         </div>

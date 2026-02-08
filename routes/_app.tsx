@@ -23,21 +23,22 @@ export default function App({ Component }: PageProps) {
           <header slot="header">
               <div class="container">
                 <div class="nav">
-                  <a class="brand" href="#top" aria-label="Collapse Theory home">
-                    <img class="logo" src="./logo-128.png" alt="Collapse Theory logo" />
+                  <a class="brand" href="/" aria-label="Collapse Theory home">
+                    <img class="logo" src="/logo-800.png" alt="Collapse Theory logo" />
                     <span>Collapse Theory</span>
                   </a>
 
                   <nav class="navlinks" aria-label="Primary">
-                    <a href="#manifesto">Manifesto</a>
-                    <a href="#games">Games</a>
-                    <a href="#promise">Player Promise</a>
-                    <a href="#join">Join</a>
+                    <a href="/#manifesto">Manifesto</a>
+                    <a href="/#games">Games</a>
+                    <a href="/#promise">Player Promise</a>
+                    <a href="/#join">Join</a>
+                    <a href="/droppy-blocky">Droppy Blocky</a>
                   </nav>
 
                   <div class="cta">
-                    <a class="btn" href="#join">Get updates</a>
-                    <a class="btn primary" href="https://block-sinvl.netlify.app/">See Droppy Blocky</a>
+                    <a class="btn" href="/#join">Get updates</a>
+                    <a class="btn primary" href="/droppy-blocky">See Droppy Blocky</a>
                   </div>
                 </div>
               </div>
@@ -60,10 +61,11 @@ export default function App({ Component }: PageProps) {
                   <div style="font-size:12px;margin-top:4px">© <span id="year"></span> Collapse Theory. All rights reserved.</div>
                 </div>
                 <div class="footerLinks" aria-label="Footer links">
-                  <a href="#manifesto">Manifesto</a>
-                  <a href="#games">Games</a>
-                  <a href="#promise">Promise</a>
-                  <a href="#join">Join</a>
+                  <a href="/#manifesto">Manifesto</a>
+                  <a href="/#games">Games</a>
+                  <a href="/#promise">Promise</a>
+                  <a href="/#join">Join</a>
+                  <a href="/droppy-blocky">Droppy Blocky</a>
                 </div>
               </div>
             </div>
